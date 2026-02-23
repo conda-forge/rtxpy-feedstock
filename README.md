@@ -226,5 +226,4 @@ Feedstock Maintainers
 =====================
 
 * [@brendancol](https://github.com/brendancol/)
-* [@ianthomas23](https://github.com/ianthomas23/)
 
