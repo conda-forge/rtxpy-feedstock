@@ -39,7 +39,6 @@ requirements:
     - duckdb <1.4
     - requests
     - matplotlib-base
-    - __cuda  # [linux]
 
 test:
   commands:
