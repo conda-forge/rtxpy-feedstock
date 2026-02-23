@@ -42,10 +42,11 @@ requirements:
     - __cuda  # [linux]
 
 test:
-  imports:
-    - rtxpy
   commands:
-    - python -c "from rtxpy import RTX; print('rtxpy imported successfully')"
+    # Full import requires NVIDIA GPU + CUDA driver (optix bindings);
+    # just verify the package files are installed correctly.
+    - python -c "import importlib.util; assert importlib.util.find_spec('rtxpy') is not None"
+    - python -c "import importlib.util; assert importlib.util.find_spec('optix') is not None"
 
 about:
   home: https://github.com/makepath/rtxpy
