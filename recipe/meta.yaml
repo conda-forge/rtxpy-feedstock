@@ -36,7 +36,6 @@ requirements:
     - moderngl
     - libegl-devel  # [linux]
     - scipy
-    - duckdb <1.4
     - requests
     - matplotlib-base
 
