@@ -1,5 +1,5 @@
 {% set name = "rtxpy" %}
-{% set version = "0.0.8" %}
+{% set version = "0.0.9" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/rtxpy-{{ version }}.tar.gz
-  sha256: cf6486a404b0f7997679a0013100786f43fa23c4816ab59e078603f1f5713eba
+  sha256: 6fa3d5a56a8ff2444c61f24ce6415291d1a16f6cfa9b75f1c17975a6c74d4ae2
 
 build:
   number: 0
