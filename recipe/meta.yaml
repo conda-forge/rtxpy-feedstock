@@ -1,5 +1,5 @@
 {% set name = "rtxpy" %}
-{% set version = "0.0.3" %}
+{% set version = "0.0.8" %}
 
 package:
   name: {{ name|lower }}
@@ -7,42 +7,55 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/rtxpy-{{ version }}.tar.gz
-  sha256: 7f47c3d1cb161220ca2a99ba52c6f0c15435626d8f90b2286d5ffd6260cb1f45
+  sha256: cf6486a404b0f7997679a0013100786f43fa23c4816ab59e078603f1f5713eba
 
 build:
-  number: 4
-  skip: true   # [osx]
-  script: {{ PYTHON }} -m pip install . -vv
+  number: 0
+  skip: true  # [osx]
+  skip: true  # [py<310]
 
 requirements:
-  build:
-    - {{ compiler('c') }}
-    - {{ stdlib("c") }}
-    - {{ compiler('cxx') }}
-    - cmake >=3.10
-    - make  # [unix]
   host:
     - pip
     - python
-    - setuptools
+    - setuptools >=68
+    - wheel
   run:
-    - numpy >=1.16
     - python
+    - numpy >=1.21,<3  # [py<313]
+    - numpy >=2.0,<3  # [py>=313]
+    - numba >=0.56
+    - cupy >=12.0
+    - zarr >=2.0
+    - xarray
+    - rioxarray
+    - xarray-spatial
+    - pyproj
+    - pillow
+    - pyglfw
+    - moderngl
+    - libegl-devel  # [linux]
+    - scipy
+    - requests
+    - matplotlib-base
 
 test:
-  imports:
-    - rtxpy
-    - rtxpy.tests
   commands:
-    - pip check
-  requires:
-    - pip
+    # Full import requires NVIDIA GPU + CUDA driver (optix bindings);
+    # just verify the package files are installed correctly.
+    - python -c "import importlib.util; assert importlib.util.find_spec('rtxpy') is not None"
+    - python -c "import importlib.util; assert importlib.util.find_spec('optix') is not None"
 
 about:
   home: https://github.com/makepath/rtxpy
-  summary: Ray tracing using CUDA accessible from Python
   license: MIT
+  license_family: MIT
   license_file: LICENSE
+  summary: Ray tracing using CUDA accessible from Python
+  description: |
+    RTXpy provides GPU-accelerated ray-triangle intersection using
+    NVIDIA's OptiX ray tracing engine via the pyoptix-contrib Python bindings.
+  dev_url: https://github.com/makepath/rtxpy
 
 extra:
   recipe-maintainers:
