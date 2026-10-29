@@ -6,11 +6,11 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/rtxpy-{{ version }}.tar.gz
+  url: https://files.pythonhosted.org/packages/source/{{ name[0] }}/{{ name }}/rtxpy-{{ version }}.tar.gz
   sha256: 6fa3d5a56a8ff2444c61f24ce6415291d1a16f6cfa9b75f1c17975a6c74d4ae2
 
 build:
-  number: 0
+  number: 1
   skip: true  # [osx]
   skip: true  # [py<310]
 
